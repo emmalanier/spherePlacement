@@ -22,11 +22,17 @@ int main()
   double dPhi = 0.0;
 
   int n = 0; //Number of elements to be placed
-  std::vector<double> coordinates [n*3] = 0.0;
+  std::vector<double> coordinates;
 
   getDatas(n, radius);
   computeValuesFromDatas(n, radius, surfDensity, sqrtSurfDensity, mTheta, dTheta, dPhi);
   
+  coordinates = computeResults(radius, mTheta, dPhi);
+
+  std::ofstream coordinatesFile("sphere_positions");
+
+  for(int i=0; i<(results.size()/3); i++)
+    coordinatesFile << setw(15) << results[3*i] << " ; " << results[3*i+1] << " ; " << results[3*i+2] << std::endl;
 
   return 0;
 }
