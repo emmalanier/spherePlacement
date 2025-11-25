@@ -29,7 +29,7 @@ int main()
   
   coordinates = computeResults(radius, mTheta, dPhi);
 
-  std::ofstream coordinatesFile("sphere_positions");
+  std::ofstream coordinatesFile("sphere_positions.txt");
 
   for(int i=0; i<(results.size()/3); i++)
     coordinatesFile << setw(15) << results[3*i] << " ; " << results[3*i+1] << " ; " << results[3*i+2] << std::endl;
