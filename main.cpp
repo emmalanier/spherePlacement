@@ -22,8 +22,10 @@ int main()
   double dPhi = 0.0;
 
   int n = 0; //Number of elements to be placed
+  std::vector<double> coordinates [n*3] = 0.0;
 
   getDatas(n, radius);
+  computeValuesFromDatas(n, radius, surfDensity, sqrtSurfDensity, mTheta, dTheta, dPhi);
   
 
   return 0;
