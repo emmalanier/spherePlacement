@@ -6,12 +6,12 @@
 
 int main()
 {
-  double x = 0.0;
-  double y = 0.0;
-  double z = 0.0;
+  //double x = 0.0;
+  //double y = 0.0;
+  //double z = 0.0;
 
-  double theta = 0.0;
-  double phi = 0.0;
+  //double theta = 0.0;
+  //double phi = 0.0;
 
   double radius = 0.0;
   double surfDensity = 0.0;
@@ -31,8 +31,8 @@ int main()
 
   std::ofstream coordinatesFile("sphere_positions.txt");
 
-  for(int i=0; i<(results.size()/3); i++)
-    coordinatesFile << setw(15) << results[3*i] << " ; " << results[3*i+1] << " ; " << results[3*i+2] << std::endl;
+  for(int i=0; i<(coordinates.size()/3); i++)
+    coordinatesFile << std::setw(15) << coordinates[3*i] << " ; " << std::setw(15) << coordinates[3*i+1] << " ; " << std::setw(15) << coordinates[3*i+2] << std::endl;
 
   return 0;
 }

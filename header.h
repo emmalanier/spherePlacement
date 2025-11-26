@@ -10,9 +10,11 @@
 #include <iostream>
 #include <fstream>
 #include <cstdlib>
+#include <vector>
+#include <iomanip>
 
 void getDatas(int&, double&);
-void computeValuesFromDatas(const int&, const double&, double&, double&, double&, double&);
+void computeValuesFromDatas(const int&, const double&, double&, double&, double&, double&, double&);
 double placeX(double&, double&, double&);
 double placeY(double&, double&, double&);
 double placeZ(double&, double&);

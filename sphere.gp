@@ -4,14 +4,15 @@
 # ==========================================
 
 filename = 'sphere_positions.txt'
+set datafile separator ";"
 
 # Lecture du nombre d'atomes depuis la première ligne
 firstline = system("head -n 1 ".filename)
-ncolums = words(firstline)
+ncolumns = words(firstline)
 n = int(ncolumns / 3)
 
 # Réglage général
-param = 10   # définit l'étendue des axes
+param = 1.0   # définit l'étendue des axes
 set terminal pngcairo size 800,800 enhanced font 'Helvetica,10'
 set output '3D_plot.png'
 
@@ -27,6 +28,7 @@ set palette color
 
 # Paramètres du graphe
 unset key
+set view equal xyz
 set size ratio -1
 set xlabel "x" textcolor rgb "black"
 set ylabel "y" textcolor rgb "black"
@@ -38,10 +40,11 @@ set zrange [-param:param]
 set title "Configuration unique" textcolor rgb "black"
 set border lc rgb "black"
 set tics textcolor rgb "black"
-set view 90, 30, 1.0, 1.0  # Vue 3D
+set view 80, 60, 1.0, 1.0  # Vue 3D
 
 # --- 3D plot ---
-splot for [j=(n-1):0:-1] filename every ::0::0 using (column(3*j+1)):(column(3*j+2)):(column(3*j+3)):(j) \
- with points pt 7 ps 1 lc palette
+splot 'sphere_positions.txt' using 1:2:3:(acos($3 / sqrt($1*$1 + $2*$2 + $3*$3))) \
+      with points pt 7 ps 1 lc palette
+
 
 unset output

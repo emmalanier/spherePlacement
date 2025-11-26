@@ -17,7 +17,7 @@ void computeValuesFromDatas(const int& n, const double& r, double& a, double& d,
 {
   a = (4.0*M_PI*r*r)/(1.0*n) ;
   d = sqrt(a);
-  mT = rint(M_PI/d) ;
+  mT = round(M_PI/d) ;
   dTheta = M_PI/mT;
   dPhi = a/dTheta;
 }
@@ -50,12 +50,12 @@ std::vector <double> computeResults(double& r, double& mTheta, double& dPhi)
   double theta = 0.0;
   double phi = 0.0;
 
-  for(int i=0; i<mTheta; i++)
+  for(int i=0; i<rint(mTheta); i++)
     {
       theta = (M_PI*(i+0.5))/mTheta;
-      mPhi = rint((2.0*M_PI*sin(theta))/dPhi);
+      mPhi = round((2.0*M_PI*sin(theta))/dPhi);
 
-      for(int j=0; j < mPhi; j++)
+      for(int j=0; j < rint(mPhi); j++)
         {
           phi = (2.0*M_PI*j)/mPhi;
           results.push_back(placeX(theta, phi, r));
