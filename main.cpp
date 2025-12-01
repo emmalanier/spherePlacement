@@ -6,12 +6,7 @@
 
 int main()
 {
-  //double x = 0.0;
-  //double y = 0.0;
-  //double z = 0.0;
 
-  //double theta = 0.0;
-  //double phi = 0.0;
 
   double radius = 0.0;
   double surfDensity = 0.0;

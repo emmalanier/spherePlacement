@@ -4,6 +4,10 @@
 
 #include "header.h"
 
+//////////
+//INPUTS//
+//////////
+
 void getDatas(int& n, double& r)
 {
   std::cout << "Number of elements to place ? " << std::endl;
@@ -12,6 +16,11 @@ void getDatas(int& n, double& r)
   std::cout << "Desired sphere radius ? " << std::endl;
   std::cin >> r;
 }
+
+
+//////////////////////////
+//FIRST PROGRAMM METHODS//
+//////////////////////////
 
 void computeValuesFromDatas(const int& n, const double& r, double& a, double& d, double& mT, double& dTheta, double& dPhi)
 {
@@ -64,6 +73,48 @@ std::vector <double> computeResults(double& r, double& mTheta, double& dPhi)
         }
       }
       
+
+  return results;
+}
+
+
+//////////////////////////////////////
+//2ND PROGRAM (MINIMISATION) METHODS//
+//////////////////////////////////////
+
+std::vector <double> defineSmallAngles(double& dCircumference, double& phase)
+{
+  std::vector <double> results; //1D vector containing two elements : dtheta at index 0, dphi at index 1
+
+  results.push_back(
+
+  return results;
+}
+
+std::vector <double> smallDeplacement()
+{
+  std::vector <double> results;
+
+  return results;
+}
+
+std::vector <double> newRandomPositions()
+{
+  std::vector <double> results;
+
+  return results;
+}
+
+bool compareVectors()
+{
+  bool result;
+
+  return result;
+}
+
+std::vector <double> getNewVector()
+{
+  std::vector <double> results;
 
   return results;
 }
