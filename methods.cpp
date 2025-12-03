@@ -82,32 +82,102 @@ std::vector <double> computeResults(double& r, double& mTheta, double& dPhi)
 //2ND PROGRAM (MINIMISATION) METHODS//
 //////////////////////////////////////
 
-std::vector <double> defineSmallAngles(double& dCircumference, double& phase)
+/*std::vector <double> defineSmallAngles(double& dCircumference, double& phase)
 {
   std::vector <double> results; //1D vector containing two elements : dtheta at index 0, dphi at index 1
 
   results.push_back(
 
   return results;
+}*/
+
+double distanceOnTheSurface(const pos& pos1, const pos& pos2)
+{
+
 }
 
-std::vector <double> smallDeplacement()
+std::vector <double> smallDeplacement(double& lambda, const double& radius)
 {
-  std::vector <double> results;
+  std::vector <double> results; //1D vector containing 3 elements : X, Y and Z deplacements
+  double randTheta = ((2.0*(1.0*rand()/RAND_MAX)) - 1.0)*360.0*lambda ;
+  double randPhi = ((2.0*(1.0*rand()/RAND_MAX)) - 1.0)*360.0*lambda ;
+
+  double dx = radius*sin(rendTheta)*cos(randPhi);
+  double dy = radius*sin(rendTheta)*sin(randPhi) ;
+  double dz = radius*cos(theta);
+
+  results.push_back(dx);
+  results.push_back(dy);
+  results.push_back(dz);
 
   return results;
 }
 
-std::vector <double> newRandomPositions()
+std::vector <double> newRandomPositions(const int& nElements, const int& maxIter const int& numberOfInc, const double& radius, const std::vector <double>& vec)
 {
-  std::vector <double> results;
+  std::vector <double> results = vec;
+  int iterPerInc = rint(maxIter/incrementationFrequency);
+
+  for(int i=1; i<=numberOfInc; i++)
+    {
+      for(int j=1; j<=iterPerInc; j++)
+        {
+          for(int k=0; k<nElements; k++)
+            {
+              std::vector <double> dep = smallDeplacement(i, radius);
+              results.[k*3] = dep[0];
+              results.[1 + k*3] = dep[1];
+              results.[2 + k*3] = dep[2];
+            }
+        }
+    }
 
   return results;
 }
 
-bool compareVectors()
+bool compareVectors(const std::vector <double>& oldVec, const std::vector <double>& newVec)
 {
-  bool result;
+  bool result = false;
+
+  if((oldVec.size()/3)%2 == 0)
+    {
+      double sumOldVec = 0.0;
+      double sumNewVec = 0.0;
+      
+      for(int i=0; i<(oldVec.size()/2); i++)
+        {
+          sumOldVec += pow(-1, i)*distance(oldVecPoint[i]);
+        }
+
+      for(int i=0; i<(newVec.size()/2); i++)
+        {
+          sumNewVec += pow(-1, i)*distance();
+        }
+
+      if(sumNewVec < sumOldVec)
+        result = true ;
+    }
+
+    else if((oldVec.size()/3)%2 != 0)
+    {
+      double sumOldVec = 0.0;
+      double sumNewVec = 0.0;
+      
+      for(int i=0; i<((oldVec.size()-1)/2); i++)
+        {
+          sumOldVec += distance();
+        }
+      sumOldVec += distance();
+
+      for(int i=0; i<((newVec.size()-1)/2); i++)
+        {
+          sumNewVec += distance();
+        }
+      sumNewVec += distance();
+
+      if(sumNewVec < sumOldVec)
+        result = true ;
+    }
 
   return result;
 }

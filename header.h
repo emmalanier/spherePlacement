@@ -17,6 +17,15 @@
 #include <iomanip>
 #include <ctime>
 
+//STRUCTURES//
+struct pos
+{
+  double x;
+  double y;
+  double z;
+};
+
+double distanceOnTheSurface(const pos&, const pos&);
 
 //INPUTS//
 
@@ -36,9 +45,9 @@ std::vector <double> computeResults(double&, double&, double&);
 
 //2ND PROGRAM : MINIMISATION//
 
-std::vector <double> defineSmallAngles();
-void smallDeplacement();
-std::vector <double> newRandomPositions();
+//std::vector <double> defineSmallAngles();
+std::vector <double> smallDeplacement(double&, const double&);
+std::vector <double> newRandomPositions(const int&, const int&, const int&, const double& const std::vector <double>&);
 
 bool compareVectors();
 
