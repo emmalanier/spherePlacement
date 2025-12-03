@@ -25,7 +25,7 @@ struct pos
   double z;
 };
 
-double distanceOnTheSurface(const pos&, const pos&);
+double distanceOnTheSurface(const pos&, const pos&, const double &);
 
 //INPUTS//
 
@@ -46,11 +46,11 @@ std::vector <double> computeResults(double&, double&, double&);
 //2ND PROGRAM : MINIMISATION//
 
 //std::vector <double> defineSmallAngles();
-std::vector <double> smallDeplacement(double&, const double&);
-std::vector <double> newRandomPositions(const int&, const int&, const int&, const double& const std::vector <double>&);
+std::vector <double> smallDeplacement(double, const double&);
+std::vector <pos> newRandomPositions(const int&, const int&, const int&, const double&, const std::vector <pos>&);
 
-bool compareVectors();
+bool compareVectors(const std::vector <pos>&, const std::vector <pos>&);
 
-std::vector <double> getNewVector();
+std::vector <pos> getNewVector(const bool&, const std::vector <pos>&, const std::vector <pos>&);
 
 #endif//HEADER_H

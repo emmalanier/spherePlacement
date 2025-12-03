@@ -91,20 +91,34 @@ std::vector <double> computeResults(double& r, double& mTheta, double& dPhi)
   return results;
 }*/
 
-double distanceOnTheSurface(const pos& pos1, const pos& pos2)
+double distanceOnTheSurface(const pos& pos1, const pos& pos2, const double& radius)
 {
+  double results =0.0;
+  
+  double side = 0.0;
+  double dx = pos1.x - pos2.x;
+  double dy = pos1.y - pos2.y;
+  double dz = pos1.z - pos2.z;
+  double alpha = 0.0;
 
+  side = sqrt(dx*dx + dy*dy + dz*dz);
+
+  alpha = atan(side/radius);
+
+  results = ((M_PI*2.0*radius)/360.0)*alpha;
+  
+  return results;
 }
 
-std::vector <double> smallDeplacement(double& lambda, const double& radius)
+std::vector <double> smallDeplacement(double lambda, const double& radius)
 {
   std::vector <double> results; //1D vector containing 3 elements : X, Y and Z deplacements
   double randTheta = ((2.0*(1.0*rand()/RAND_MAX)) - 1.0)*360.0*lambda ;
   double randPhi = ((2.0*(1.0*rand()/RAND_MAX)) - 1.0)*360.0*lambda ;
 
-  double dx = radius*sin(rendTheta)*cos(randPhi);
-  double dy = radius*sin(rendTheta)*sin(randPhi) ;
-  double dz = radius*cos(theta);
+  double dx = radius*sin(randTheta)*cos(randPhi);
+  double dy = radius*sin(randTheta)*sin(randPhi) ;
+  double dz = radius*cos(randTheta);
 
   results.push_back(dx);
   results.push_back(dy);
@@ -113,21 +127,21 @@ std::vector <double> smallDeplacement(double& lambda, const double& radius)
   return results;
 }
 
-std::vector <double> newRandomPositions(const int& nElements, const int& maxIter const int& numberOfInc, const double& radius, const std::vector <double>& vec)
+std::vector <pos> newRandomPositions(const int& nElements, const int& maxIter, const int& numberOfInc, const double& radius, const std::vector <pos>& vec)
 {
-  std::vector <double> results = vec;
-  int iterPerInc = rint(maxIter/incrementationFrequency);
+  std::vector <pos> results = vec;
+  int iterPerInc = rint(maxIter/numberOfInc);
 
   for(int i=1; i<=numberOfInc; i++)
     {
       for(int j=1; j<=iterPerInc; j++)
         {
-          for(int k=0; k<nElements; k++)
+          for(int k=0; k<vec.size(); k++)
             {
-              std::vector <double> dep = smallDeplacement(i, radius);
-              results.[k*3] = dep[0];
-              results.[1 + k*3] = dep[1];
-              results.[2 + k*3] = dep[2];
+              std::vector <double> dep = smallDeplacement(i*1.0, radius);
+              results[k].x += dep[0];
+              results[k].y += dep[1];
+              results[k].z += dep[2];
             }
         }
     }
@@ -135,7 +149,7 @@ std::vector <double> newRandomPositions(const int& nElements, const int& maxIter
   return results;
 }
 
-bool compareVectors(const std::vector <double>& oldVec, const std::vector <double>& newVec)
+bool compareVectors(const std::vector <pos>& oldVec, const std::vector <pos>& newVec, const double& radius)
 {
   bool result = false;
 
@@ -146,12 +160,12 @@ bool compareVectors(const std::vector <double>& oldVec, const std::vector <doubl
       
       for(int i=0; i<(oldVec.size()/2); i++)
         {
-          sumOldVec += pow(-1, i)*distance(oldVecPoint[i]);
+          sumOldVec += pow(-1, i)*distanceOnTheSurface(oldVec[i*2], oldVec[1+i*2], radius);
         }
 
       for(int i=0; i<(newVec.size()/2); i++)
         {
-          sumNewVec += pow(-1, i)*distance();
+          sumNewVec += pow(-1, i)*distanceOnTheSurface(newVec[i*2], newVec[1+i*2], radius);
         }
 
       if(sumNewVec < sumOldVec)
@@ -165,15 +179,15 @@ bool compareVectors(const std::vector <double>& oldVec, const std::vector <doubl
       
       for(int i=0; i<((oldVec.size()-1)/2); i++)
         {
-          sumOldVec += distance();
+          sumOldVec += pow(-1, i)*distanceOnTheSurface(oldVec[i*2], oldVec[1+i*2], radius);
         }
-      sumOldVec += distance();
+      sumOldVec -= distanceOnTheSurface(oldVec[oldVec.size()-2], oldVec[oldVec.size()-1], radius);
 
       for(int i=0; i<((newVec.size()-1)/2); i++)
         {
-          sumNewVec += distance();
+          sumNewVec += pow(-1, i)*distanceOnTheSurface(newVec[i*2], newVec[1+i*2], radius);
         }
-      sumNewVec += distance();
+      sumNewVec -= distanceOnTheSurface(newVec[newVec.size()-2], newVec[newVec.size()-2], radius);
 
       if(sumNewVec < sumOldVec)
         result = true ;
@@ -182,9 +196,15 @@ bool compareVectors(const std::vector <double>& oldVec, const std::vector <doubl
   return result;
 }
 
-std::vector <double> getNewVector()
+std::vector <pos> getNewVector(const bool& b, const std::vector <pos>& oldVec, const std::vector <pos>& newVec)
 {
-  std::vector <double> results;
+  std::vector <pos> results;
+
+  if(b==true)
+    results = newVec;
+
+  else
+    results = oldVec;
 
   return results;
 }
