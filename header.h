@@ -18,7 +18,7 @@
 
 //INPUTS//
 
-void getDatas(int&, double&, int&, int&);
+void getDatas(int&, double&);
 
 
 //1ST PROGRAM//

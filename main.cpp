@@ -20,7 +20,7 @@ int main()
   std::vector<pos> coordinates2;
 
   //PROGRAM
-  getDatas(n, radius, maxIter, numberOfInc);
+  getDatas(n, radius);
   computeValuesFromDatas(n, radius, surfDensity, sqrtSurfDensity, mTheta, dTheta, dPhi);
   
   coordinates = computeResults(radius, mTheta, dPhi);

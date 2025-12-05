@@ -31,11 +31,11 @@ larger projects.
 file; however, for those who want to check them visually, a Gnuplot script is included.
 Gnuplot can be installed using the following commands : 
 
-*Linux : `sudo apt install gnuplot`
+* Linux : `sudo apt install gnuplot`
 
-*macOs : `brew install gnuplot`
+* macOs : `brew install gnuplot`
 
-*Windows : `choco install gnuplot`
+* Windows : `choco install gnuplot`
 
 
 ### Build system
@@ -49,8 +49,32 @@ Windows/macOS OS.
 
 ### General things
 
+#### Inputs-related methods
+
+**getDatas** allows the user to enter desired parameters (radius and number of elements to place) by interacting with 
+the console.
+
+**computeValuesFromDatas** computes the values of variables that won't be changed later on in the program, but that
+depend of the chosen parameters.
+
+#### Placement methods
+
+**placeX/Y/Z** simply converts polar coordinates into cartesian coordinates.
+
+**computeResults** is the core method of the program. The output is a 1D vector, whose size is approx. (see "Outputs" 
+section) three times the number of elements the user asked to place. It takes 3 fixed parameters, and creates three
+other ones (mPhi, theta and phi) whose values will change based on the number of the iterations at which it is
+calculated. The first loop allows to compute the value of the theta angle, and the value of mPhi, which will later be
+used to compute the value of the phi angle. The second loop (nested in the first one), computes the phi angle, and 
+places an element according to the current values of theta and phi.
 
 ### Inputs
+
+There are two inputs : the radius and the number of elements the user wants to place on the sphere.
+
+For the **radius**, it is STRONGLY recommanded to set it at 1.0 . Not doing so will result in the program placing 
+either a lot more or a lot less elements than the user required. If for some reason you need your sphere to have a 
+bigger radius, upcoming additions to the current code will allow it. For now however, it is not handled.
 
 ### Outputs
 
