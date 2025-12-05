@@ -1,1 +1,4 @@
-*.png *.txt *.o *.exe
+*.png 
+*.txt 
+*.o 
+*.exe
