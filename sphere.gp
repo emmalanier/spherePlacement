@@ -3,7 +3,7 @@
 # 3D Plot Script - Single Configuration
 # ==========================================
 
-filename = 'sphere_positions.txt'
+filename = 'sphere_positions_code_1.txt'
 set datafile separator ";"
 
 # Lecture du nombre d'atomes depuis la première ligne
@@ -14,7 +14,7 @@ n = int(ncolumns / 3)
 # Réglage général
 param = 1.0   # définit l'étendue des axes
 set terminal pngcairo size 800,800 enhanced font 'Helvetica,10'
-set output '3D_plot.png'
+set output '3D_plot_code_1.png'
 
 # Palette (pink and purple gradient)
 set palette defined (\
@@ -43,7 +43,7 @@ set tics textcolor rgb "black"
 set view 80, 60, 1.0, 1.0  # Vue 3D
 
 # --- 3D plot ---
-splot 'sphere_positions.txt' using 1:2:3:(acos($3 / sqrt($1*$1 + $2*$2 + $3*$3))) \
+splot 'sphere_positions_code_1.txt' using 1:2:3:(acos($3 / sqrt($1*$1 + $2*$2 + $3*$3))) \
       with points pt 7 ps 1 lc palette
 
 
